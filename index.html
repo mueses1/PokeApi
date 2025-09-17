@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="Assets/PokeBola.png" type="image/x-icon">
+    <script src="logica.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Pokémon Explorer</h1>
+            <p class="subtitle">Descubre y explora el mundo Pokémon con PokeAPI</p>
+        </header>
+
+        <div class="controls">
+            <div class="control-row">
+                <div class="control-group">
+                    <label for="searchInput">Buscar Pokémon</label>
+                    <div class="search-input">
+                        <input type="text" id="searchInput" placeholder="Ej: pikachu, charizard...">
+                        <div class="search-suggestions" id="searchSuggestions"></div>
+                    </div>
+                    <div class="error-message" id="searchError"></div>
+                </div>
+
+                <div class="control-group">
+                    <label for="typeFilter">Filtrar por Tipo</label>
+                    <select id="typeFilter">
+                        <option value="">Todos los tipos</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="generationFilter">Generación</label>
+                    <select id="generationFilter">
+                        <option value="">Todas las generaciones</option>
+                        <option value="1">Gen I (1-151)</option>
+                        <option value="2">Gen II (152-251)</option>
+                        <option value="3">Gen III (252-386)</option>
+                        <option value="4">Gen IV (387-493)</option>
+                        <option value="5">Gen V (494-649)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Cargando Pokémon...</p>
+        </div>
+
+        <div class="pokemon-grid" id="pokemonGrid"></div>
+
+        <div class="no-results" id="noResults" style="display: none;">
+            <div class="no-results-icon">😕</div>
+            <p>No se encontraron Pokémon con los criterios seleccionados</p>
+        </div>
+
+        <div class="pagination" id="pagination"></div>
+    </div>
+    <div class="arcade-pixels"></div>
+    <script>
+        const pixelColors = ['#fff900', '#ff0055', '#00eaff'];
+        for (let i = 0; i < 30; i++) {
+            const px = document.createElement('div');
+            px.className = 'arcade-pixel';
+            px.style.left = Math.random() * 100 + 'vw';
+            px.style.top = (Math.random() * 100) + 'vh';
+            px.style.background = pixelColors[Math.floor(Math.random() * pixelColors.length)];
+            px.style.animationDuration = (4 + Math.random() * 4) + 's';
+            document.querySelector('.arcade-pixels').appendChild(px);
+        }
+    </script>
+</body>
+
+</html>
