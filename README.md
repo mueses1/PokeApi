@@ -21,6 +21,8 @@ Proyecto web hecho con **HTML, CSS y JavaScript puro**, que consume la [PokeAPI]
 <img width="1919" height="911" alt="imagen" src="https://github.com/user-attachments/assets/48c69837-5576-4a9b-b2b1-1c9206dfe533" />
 <img width="1919" height="915" alt="imagen" src="https://github.com/user-attachments/assets/953d0aba-a8ae-4cb5-865e-b65bb71cc86d" />
 
+https://github.com/user-attachments/assets/b3d200a1-60af-4fd4-a168-6dbe02aed763
+
 
 ## 📂 Estructura del proyecto
 pokedex/</br>
