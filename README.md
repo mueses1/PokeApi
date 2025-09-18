@@ -18,10 +18,9 @@ Proyecto web hecho con **HTML, CSS y JavaScript puro**, que consume la [PokeAPI]
 - **PokeAPI** → Fuente de datos
 
 ## 📷 Vista previa
-<img width="1919" height="911" alt="imagen" src="https://github.com/user-attachments/assets/48c69837-5576-4a9b-b2b1-1c9206dfe533" />
-<img width="1919" height="915" alt="imagen" src="https://github.com/user-attachments/assets/953d0aba-a8ae-4cb5-865e-b65bb71cc86d" />
-
-https://github.com/user-attachments/assets/b3d200a1-60af-4fd4-a168-6dbe02aed763
+<img width="1919" height="916" alt="imagen" src="https://github.com/user-attachments/assets/26a1fe61-bb92-4132-b5f7-4747f8dccd84" />
+<img width="1919" height="916" alt="imagen" src="https://github.com/user-attachments/assets/ad0a2221-5c4d-44e1-82d9-24177b35c197" />
+https://github.com/user-attachments/assets/83b084c8-3122-471e-8a30-518c087d44ff
 
 
 ## 📂 Estructura del proyecto
