@@ -310,6 +310,30 @@ select:focus {
     overflow: hidden;
 }
 
+.toggle-info {
+  background: #05cdff;
+  border: 2px solid rgb(212, 133, 30);
+  color: #1a1a1a;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+  display: block;
+  width: fit-content;
+}
+
+.toggle-info:hover {
+  background: #ffc266;
+}
+
+.extra-info {
+  margin-top: 10px;
+}
+
+
 .pokemon-card:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 
@@ -746,6 +770,117 @@ select:focus {
         grid-template-columns: 1fr;
     }
 }
+
+/* 📱 Mejoras específicas para móviles */
+@media (max-width: 480px) {
+    body {
+        padding-bottom: 80px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        line-height: 1.4;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .controls {
+        padding: 16px 12px;
+        border-radius: 12px;
+    }
+
+    .control-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    input[type="text"],
+    select {
+        font-size: 1rem;
+        padding: 10px 12px;
+    }
+
+    .pokemon-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .pokemon-card {
+        border-radius: 14px;
+        padding: 12px;
+    }
+
+    .pokemon-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .pokemon-image img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .pokemon-name {
+        font-size: 1.3em;
+    }
+
+    .pokemon-stats {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .stat-item {
+        font-size: 0.8em;
+        padding: 10px;
+    }
+
+    .abilities-list {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pagination {
+        gap: 6px;
+    }
+
+    .pagination button {
+        padding: 8px 14px;
+        font-size: 12px;
+        border-radius: 8px;
+    }
+
+    .cry-button {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+}
+
+/* 👇 Controla que el botón solo aparezca en móvil */
+@media (max-width: 768px) {
+  .extra-info {
+    display: none; /* Oculto en móvil por defecto */
+  }
+  .pokemon-card.open .extra-info {
+    display: block; /* Se muestra cuando das click en "Ver más" */
+  }
+  .toggle-info {
+    display: block; /* Botón visible en móvil */
+  }
+}
+
+@media (min-width: 769px) {
+  .extra-info {
+    display: block !important; /* Siempre visible en PC */
+  }
+  .toggle-info {
+    display: none !important; /* Botón oculto en PC */
+  }
+}
+
 
 /* Google Fonts para estilo arcade */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');

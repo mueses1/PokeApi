@@ -368,34 +368,65 @@ class PokemonExplorer {
         // Usar color del tipo primario o gradiente por defecto
         const backgroundGradient = typeColors[pokemon.types[0]] || 'linear-gradient(135deg, #667eea, #764ba2)';
 
-        // Generar HTML de la tarjeta con toda la información del Pokémon
-        card.innerHTML = `
-            <div class="pokemon-card-content">
-                <div class="pokemon-image">
-                    <img src="${pokemon.image}" alt="${pokemon.name}" loading="lazy">
-                    ${pokemon.cry ? `<button class="cry-button" title="Clic para activar audio, luego hover para escuchar">🔊</button>` : ''}
+      // Generar HTML de la tarjeta con toda la información del Pokémon
+card.innerHTML = `
+    <div class="pokemon-card-content">
+        <div class="pokemon-image">
+            <img src="${pokemon.image}" alt="${pokemon.name}" loading="lazy">
+            ${pokemon.cry ? `<button class="cry-button" title="Clic para activar audio, luego hover para escuchar">🔊</button>` : ''}
+        </div>
+        <div class="pokemon-name">${pokemon.name}</div>
+        <div class="pokemon-id">#${String(pokemon.id).padStart(3, '0')}</div>
+        <div class="pokemon-types">
+            ${pokemon.types.map(type =>
+                `<span class="type-badge type-${type}">${type}</span>`
+            ).join('')}
+        </div>
+
+        <!-- Botón para expandir información -->
+        <button class="toggle-info">Ver más</button>
+
+        <!-- Contenido oculto -->
+        <div class="extra-info">
+            <div class="pokemon-details">
+                <div class="pokemon-info-row">
+                    <span class="pokemon-info-label">Altura:</span>
+                    <span>${pokemon.height}m</span>
                 </div>
-                <div class="pokemon-name">${pokemon.name}</div>
-                <div class="pokemon-id">#${String(pokemon.id).padStart(3, '0')}</div>
-                <div class="pokemon-types">${pokemon.types.map(type =>
-            `<span class="type-badge type-${type}">${type}</span>`).join('')}</div>
-                <div class="pokemon-details">
-                    <div class="pokemon-info-row"><span class="pokemon-info-label">Altura:</span><span>${pokemon.height}m</span></div>
-                    <div class="pokemon-info-row"><span class="pokemon-info-label">Peso:</span><span>${pokemon.weight}kg</span></div>
-                    <div class="pokemon-info-row"><span class="pokemon-info-label">Experiencia:</span><span>${pokemon.baseExperience} XP</span></div>
-                    <div class="abilities-section">
-                        <div class="pokemon-info-label">Habilidades:</div>
-                        <div class="abilities-list">${pokemon.abilities.slice(0, 3).map(ability =>
-                `<span class="ability-badge">${ability.replace('-', ' ')}</span>`).join('')}</div>
+                <div class="pokemon-info-row">
+                    <span class="pokemon-info-label">Peso:</span>
+                    <span>${pokemon.weight}kg</span>
+                </div>
+                <div class="pokemon-info-row">
+                    <span class="pokemon-info-label">Experiencia:</span>
+                    <span>${pokemon.baseExperience} XP</span>
+                </div>
+                <div class="abilities-section">
+                    <div class="pokemon-info-label">Habilidades:</div>
+                    <div class="abilities-list">
+                        ${pokemon.abilities.slice(0, 3).map(ability =>
+                            `<span class="ability-badge">${ability.replace('-', ' ')}</span>`
+                        ).join('')}
                     </div>
                 </div>
-                <div class="pokemon-stats">
-                    ${[['❤️ HP', pokemon.stats.hp], ['⚔️ Ataque', pokemon.stats.attack],
-            ['🛡️ Defensa', pokemon.stats.defense], ['⚡ Velocidad', pokemon.stats.speed]]
-                .map(([name, value]) => `<div class="stat-item"><div class="stat-name">${name}</div><div class="stat-value">${value}</div></div>`).join('')}
-                </div>
             </div>
-        `;
+
+            <div class="pokemon-stats">
+                ${[
+                    ['❤️ HP', pokemon.stats.hp],
+                    ['⚔️ Ataque', pokemon.stats.attack],
+                    ['🛡️ Defensa', pokemon.stats.defense],
+                    ['⚡ Velocidad', pokemon.stats.speed]
+                ].map(([name, value]) => `
+                    <div class="stat-item">
+                        <div class="stat-name">${name}</div>
+                        <div class="stat-value">${value}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    </div>
+`;
 
         // Agregar funcionalidad de reproducir grito
         if (pokemon.cry) {
@@ -423,6 +454,20 @@ class PokemonExplorer {
         // Aplicar gradiente de fondo basado en el tipo
         card.style.setProperty('--card-gradient', backgroundGradient);
         card.style.background = backgroundGradient;
+
+        // Activar el botón "Ver más / Ver menos"
+const toggleBtn = card.querySelector('.toggle-info');
+const extraInfo = card.querySelector('.extra-info');
+toggleBtn.addEventListener('click', () => {
+    card.classList.toggle('open');
+    if (card.classList.contains('open')) {
+        toggleBtn.textContent = 'Ver menos';
+        extraInfo.style.display = 'block';
+    } else {
+        toggleBtn.textContent = 'Ver más';
+        extraInfo.style.display = 'none';
+    }
+});
         return card;
     }
 
