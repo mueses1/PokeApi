@@ -7,7 +7,10 @@
     <title>Pokédex</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="Assets/PokeBola.png" type="image/x-icon">
-    <script src="logica.js"></script>
+
+    <!-- Driver.js CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css">
+    <script src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
 </head>
 
 <body>
@@ -15,55 +18,58 @@
         <header>
             <h1>Pokémon Explorer</h1>
             <p class="subtitle">Descubre y explora el mundo Pokémon</p>
+            <button id="startTour" class="tour-button">Guía Interactiva</button>
         </header>
-
         <div class="controls">
             <div class="control-row">
-                <div class="control-group">
-                    <label for="searchInput">Buscar Pokémon</label>
+                <div class="control-group" id="search-section">
+                    <label for="searchInput" id="searchHelp">Buscar</label>
                     <div class="search-input">
-                        <input type="text" id="searchInput" placeholder="Ej: pikachu, charizard...">
+                        <input type="text" id="searchInput" placeholder="Ej: pikachu, fuego, rojo, bosque, grande...">
                         <div class="search-suggestions" id="searchSuggestions"></div>
                     </div>
                     <div class="error-message" id="searchError"></div>
                 </div>
 
-                <div class="control-group">
+                <div class="control-group" id="type-filter-section">
                     <label for="typeFilter">Filtrar por Tipo</label>
                     <select id="typeFilter">
                         <option value="">Elige el tipo</option>
                     </select>
                 </div>
 
-                <div class="control-group">
+                <div class="control-group" id="generation-filter-section">
                     <label for="generationFilter">Generación</label>
                     <select id="generationFilter">
                         <option value="">Todas las generaciones</option>
-                        <option value="1">Gen I (1-151)</option>
-                        <option value="2">Gen II (152-251)</option>
-                        <option value="3">Gen III (252-386)</option>
-                        <option value="4">Gen IV (387-493)</option>
-                        <option value="5">Gen V (494-649)</option>
+                        <option value="1">Gen I - Kanto (1-151)</option>
+                        <option value="2">Gen II - Johto (152-251)</option>
+                        <option value="3">Gen III - Hoenn (252-386)</option>
+                        <option value="4">Gen IV - Sinnoh (387-493)</option>
+                        <option value="5">Gen V - Unova (494-649)</option>
+                        <option value="6">Gen VI - Kalos (650-721)</option>
+                        <option value="7">Gen VII - Alola (722-809)</option>
+                        <option value="8">Gen VIII - Galar (810-905)</option>
+                        <option value="9">Gen IX - Paldea (906-1025)</option>
                     </select>
                 </div>
             </div>
         </div>
-
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Cargando Pokémon...</p>
-        </div>
-
-        <div class="pokemon-grid" id="pokemonGrid"></div>
-
-        <div class="no-results" id="noResults" style="display: none;">
-            <div class="no-results-icon">😕</div>
-            <p>No se encontraron Pokémon con los criterios seleccionados</p>
-        </div>
-
-        <div class="pagination" id="pagination"></div>
+    </div>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Cargando Pokémon...</p>
+    </div>
+    <div class="pokemon-grid" id="pokemonGrid"></div>
+    <div class="no-results" id="noResults" style="display: none;">
+        <div class="no-results-icon">😕</div>
+        <p>No se encontraron Pokémon con los criterios seleccionados</p>
+    </div>
+    <div class="pagination" id="pagination"></div>
     </div>
     <div class="arcade-pixels"></div>
+
+    <script src="logica.js"></script>
 </body>
 
 </html>
