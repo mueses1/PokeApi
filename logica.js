@@ -12,7 +12,110 @@ class PokemonExplorer {
             searchTimeout: null,      // Timeout para búsqueda con delay
             pokemonById: new Map(),   // Mapa para acceso rápido por ID
             pokemonByName: new Map(), // Mapa para acceso rápido por nombre
-            audioActivated: false     // Flag para saber si el usuario ya activó el audio
+            audioActivated: false,    // Flag para saber si el usuario ya activó el audio
+            // Traducciones de tipos de Pokémon al español
+            typeTranslations: {
+                'normal': 'Normal',
+                'fire': 'Fuego',
+                'water': 'Agua',
+                'electric': 'Eléctrico',
+                'grass': 'Planta',
+                'ice': 'Hielo',
+                'fighting': 'Lucha',
+                'poison': 'Veneno',
+                'ground': 'Tierra',
+                'flying': 'Volador',
+                'psychic': 'Psíquico',
+                'bug': 'Bicho',
+                'rock': 'Roca',
+                'ghost': 'Fantasma',
+                'dragon': 'Dragón',
+                'dark': 'Siniestro',
+                'steel': 'Acero',
+                'fairy': 'Hada'
+            },
+            // Traducciones de habilidades comunes al español
+            abilityTranslations: {
+                'overgrow': 'Espesura',
+                'chlorophyll': 'Clorofila',
+                'blaze': 'Llamarada',
+                'solar-power': 'Poder Solar',
+                'torrent': 'Torrente',
+                'rain-dish': 'Cura Lluvia',
+                'shield-dust': 'Polvo Escudo',
+                'run-away': 'Fuga',
+                'keen-eye': 'Vista Lince',
+                'tangled-feet': 'Pies Enredados',
+                'big-pecks': 'Sacapecho',
+                'guts': 'Agallas',
+                'hustle': 'Entusiasmo',
+                'intimidate': 'Intimidación',
+                'static': 'Electricidad Estática',
+                'lightning-rod': 'Pararrayos',
+                'sand-veil': 'Velo Arena',
+                'poison-point': 'Punto Tóxico',
+                'rivalry': 'Rivalidad',
+                'sheer-force': 'Potencia Bruta',
+                'cute-charm': 'Gran Encanto',
+                'magic-guard': 'Muro Mágico',
+                'friend-guard': 'Compiescolta',
+                'healer': 'Curación',
+                'natural-cure': 'Cura Natural',
+                'serene-grace': 'Dicha',
+                'super-luck': 'Afortunado',
+                'swarm': 'Enjambre',
+                'sniper': 'Francotirador',
+                'sturdy': 'Robustez',
+                'rock-head': 'Cabeza Roca',
+                'weak-armor': 'Armadura Frágil',
+                'magnet-pull': 'Imán',
+                'analytic': 'Cálculo Final',
+                'levitate': 'Levitación',
+                'effect-spore': 'Efecto Espora',
+                'dry-skin': 'Piel Seca',
+                'damp': 'Humedad',
+                'wonder-skin': 'Piel Milagro',
+                'arena-trap': 'Trampa Arena',
+                'hyper-cutter': 'Corte Fuerte',
+                'sand-stream': 'Chorro Arena',
+                'battle-armor': 'Armadura Batalla',
+                'shell-armor': 'Caparazón',
+                'clear-body': 'Cuerpo Puro',
+                'liquid-ooze': 'Lodo Líquido',
+                'thick-fat': 'Sebo',
+                'early-bird': 'Madrugar',
+                'flame-body': 'Cuerpo Llama',
+                'synchronize': 'Sincronía',
+                'inner-focus': 'Foco Interno',
+                'magma-armor': 'Armadura Magma',
+                'water-veil': 'Velo Agua',
+                'oblivious': 'Despiste',
+                'cloud-nine': 'Aclimatación',
+                'compound-eyes': 'Ojo Compuesto',
+                'insomnia': 'Insomnio',
+                'color-change': 'Cambio Color',
+                'immunity': 'Inmunidad',
+                'flash-fire': 'Absorbe Fuego',
+                'shield-dust': 'Polvo Escudo',
+                'own-tempo': 'Ritmo Propio',
+                'suction-cups': 'Ventosas',
+                'pressure': 'Presión',
+                'volt-absorb': 'Absorbe Elec',
+                'water-absorb': 'Absorbe Agua',
+                'forecast': 'Predicción',
+                'trace': 'Calco',
+                'huge-power': 'Potencia',
+                'poison-heal': 'Antídoto',
+                'adaptability': 'Adaptabilidad',
+                'skill-link': 'Encadenado',
+                'hydration': 'Hidratación',
+                'solar-power': 'Poder Solar',
+                'quick-feet': 'Pies Rápidos',
+                'normalize': 'Normalidad',
+                'wonder-guard': 'Superguarda',
+                'air-lock': 'Ausencia',
+                'truant': 'Pereza'
+            }
         });
 
         // Inicializar elementos del DOM
@@ -41,6 +144,16 @@ class PokemonExplorer {
         this.loadPokemon();
     }
 
+    // Traducir tipo de Pokémon al español
+    translateType(type) {
+        return this.typeTranslations[type] || type.charAt(0).toUpperCase() + type.slice(1);
+    }
+
+    // Traducir habilidad al español
+    translateAbility(ability) {
+        return this.abilityTranslations[ability] || ability.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    }
+
     // Cargar todos los tipos de Pokémon desde la API
     async loadPokemonTypes() {
         try {
@@ -63,7 +176,7 @@ class PokemonExplorer {
         const createOption = (name, value = name) => {
             const option = document.createElement('option');
             option.value = value;
-            option.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+            option.textContent = this.translateType(name); // Usar traducción al español
             return option;
         };
 
@@ -228,12 +341,19 @@ class PokemonExplorer {
             // Actualizar resultados y vista
             this.filteredPokemon = found;
             this.currentPage = 1;
-            found.length ? (this.displayPokemon(), this.updatePagination()) :
-                (this.showError('Pokémon no encontrado'), this.displayPokemon());
+            if (found.length) {
+                this.displayPokemon();
+                this.updatePagination();
+            } else {
+                this.showError('Pokémon no encontrado');
+                this.displayPokemon();
+                this.updatePagination(); // Asegurar que se oculte la paginación
+            }
         } catch (error) {
             this.showError('Error al buscar el Pokémon');
             this.filteredPokemon = [];
             this.displayPokemon();
+            this.updatePagination(); // Asegurar que se oculte la paginación
         } finally {
             this.showLoading(false);
         }
@@ -248,7 +368,7 @@ class PokemonExplorer {
             this.filteredPokemon = [];
             this.currentPage = 1;
             this.displayPokemon();
-            this.updatePagination();
+            this.updatePagination(); // Esto ya oculta la paginación porque filteredPokemon está vacío
             this.showError('Este tipo estará disponible muy pronto.');
             return;
         }
@@ -368,8 +488,8 @@ class PokemonExplorer {
         // Usar color del tipo primario o gradiente por defecto
         const backgroundGradient = typeColors[pokemon.types[0]] || 'linear-gradient(135deg, #667eea, #764ba2)';
 
-      // Generar HTML de la tarjeta con toda la información del Pokémon
-card.innerHTML = `
+        // Generar HTML de la tarjeta con toda la información del Pokémon
+        card.innerHTML = `
     <div class="pokemon-card-content">
         <div class="pokemon-image">
             <img src="${pokemon.image}" alt="${pokemon.name}" loading="lazy">
@@ -379,8 +499,8 @@ card.innerHTML = `
         <div class="pokemon-id">#${String(pokemon.id).padStart(3, '0')}</div>
         <div class="pokemon-types">
             ${pokemon.types.map(type =>
-                `<span class="type-badge type-${type}">${type}</span>`
-            ).join('')}
+            `<span class="type-badge type-${type}">${this.translateType(type)}</span>`
+        ).join('')}
         </div>
 
         <!-- Botón para expandir información -->
@@ -405,19 +525,19 @@ card.innerHTML = `
                     <div class="pokemon-info-label">Habilidades:</div>
                     <div class="abilities-list">
                         ${pokemon.abilities.slice(0, 3).map(ability =>
-                            `<span class="ability-badge">${ability.replace('-', ' ')}</span>`
-                        ).join('')}
+            `<span class="ability-badge">${this.translateAbility(ability)}</span>`
+        ).join('')}
                     </div>
                 </div>
             </div>
 
             <div class="pokemon-stats">
                 ${[
-                    ['❤️ HP', pokemon.stats.hp],
-                    ['⚔️ Ataque', pokemon.stats.attack],
-                    ['🛡️ Defensa', pokemon.stats.defense],
-                    ['⚡ Velocidad', pokemon.stats.speed]
-                ].map(([name, value]) => `
+                ['❤️ HP', pokemon.stats.hp],
+                ['⚔️ Ataque', pokemon.stats.attack],
+                ['🛡️ Defensa', pokemon.stats.defense],
+                ['⚡ Velocidad', pokemon.stats.speed]
+            ].map(([name, value]) => `
                     <div class="stat-item">
                         <div class="stat-name">${name}</div>
                         <div class="stat-value">${value}</div>
@@ -456,18 +576,18 @@ card.innerHTML = `
         card.style.background = backgroundGradient;
 
         // Activar el botón "Ver más / Ver menos"
-const toggleBtn = card.querySelector('.toggle-info');
-const extraInfo = card.querySelector('.extra-info');
-toggleBtn.addEventListener('click', () => {
-    card.classList.toggle('open');
-    if (card.classList.contains('open')) {
-        toggleBtn.textContent = 'Ver menos';
-        extraInfo.style.display = 'block';
-    } else {
-        toggleBtn.textContent = 'Ver más';
-        extraInfo.style.display = 'none';
-    }
-});
+        const toggleBtn = card.querySelector('.toggle-info');
+        const extraInfo = card.querySelector('.extra-info');
+        toggleBtn.addEventListener('click', () => {
+            card.classList.toggle('open');
+            if (card.classList.contains('open')) {
+                toggleBtn.textContent = 'Ver menos';
+                extraInfo.style.display = 'block';
+            } else {
+                toggleBtn.textContent = 'Ver más';
+                extraInfo.style.display = 'none';
+            }
+        });
         return card;
     }
 
@@ -476,8 +596,8 @@ toggleBtn.addEventListener('click', () => {
         const totalPages = Math.ceil(this.filteredPokemon.length / this.pokemonPerPage);
         this.pagination.innerHTML = '';
 
-        // No mostrar paginación si hay una página o menos
-        if (totalPages <= 1) return;
+        // No mostrar paginación si no hay Pokémon o hay una página o menos
+        if (this.filteredPokemon.length === 0 || totalPages <= 1) return;
 
         // Función helper para crear botones de paginación
         const createBtn = (text, disabled, onClick) => {
