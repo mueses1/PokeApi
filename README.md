@@ -4,7 +4,7 @@ Proyecto web hecho con **HTML, CSS y JavaScript puro**, que consume la [PokeAPI]
 
 ## 🚀 Características
 
-- 🔎 **Búsqueda en tiempo real** por nombre (ej: `pikachu`).
+- 🔎 **Búsqueda en tiempo real** por nombre (ej: `Pikachu`,`Charmander`,`Charmander` ).
 - 🌀 **Paginación** para recorrer la Pokédex (12 Pokémon por página).
 - 🎛 **Filtro por tipo de Pokémon** (agua, fuego, eléctrico, etc.).
 - ✅ **Validación en tiempo real** del formulario de búsqueda.
