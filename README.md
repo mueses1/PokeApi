@@ -16,13 +16,7 @@ Proyecto web hecho con **HTML, CSS y JavaScript puro**, que consume la [PokeAPI]
 - **CSS3** → Estilos y diseño responsive
 - **JavaScript (Vanilla JS)** → Consumo de la API y lógica interactiva
 - **PokeAPI** → Fuente de datos
-
-## 📷 Vista previa
-
-<img width="1919" height="916" alt="imagen" src="https://github.com/user-attachments/assets/26a1fe61-bb92-4132-b5f7-4747f8dccd84" />
-<img width="1919" height="916" alt="imagen" src="https://github.com/user-attachments/assets/ad0a2221-5c4d-44e1-82d9-24177b35c197" />
-https://github.com/user-attachments/assets/83b084c8-3122-471e-8a30-518c087d44ff
-
+  
 ## 📂 Estructura del proyecto
 
 pokedex/</br>
