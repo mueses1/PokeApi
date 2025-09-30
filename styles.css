@@ -80,8 +80,8 @@ footer {
 
 .arcade-pixel {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 20px;
+    height: 18px;
     background: #fff900;
     opacity: 0.7;
     border-radius: 2px;
